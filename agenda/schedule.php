@@ -8,22 +8,23 @@
 
 <body>
     <?php
-    $_schdeule = [
-        "Pau" => "661610908",
-        "Papi" => "677394680"
-    ];
+    if (isset($_POST['schedule'])) {
+        $schedule = $_POST['schedule'];
+    } else {
+        $schedule = array();
+    }
 
     if (isset($_POST['button'])) {
         if (isset($_POST["name"]) && isset($_POST["phone"]) && $_POST["name"] != '' && $_POST["phone"] != '') {
-            $_schdeule[$_POST["name"]] = $_POST["phone"];
+            $schedule[$_POST["name"]] = $_POST["phone"];
         } else {
             echo '<script language="javascript">';
             echo 'alert("Fill all the form fields please")';
             echo '</script>';
         }
     }
-
     ?>
+
     <div style="text-align:center;">
         <div>
             <h2>
@@ -32,8 +33,8 @@
             <!-- action, is empty bcs we execute logic in the same file -->
             <form action="" method="post">
                 <?php
-                foreach ($_schdeule as $name => $phone) {
-                    echo '<input type="hidden" name="_schdeule[' . $name . ']" value="' . $phone . '"/>';
+                foreach ($schedule as $name => $phone) {
+                    echo '<input type="hidden" name="schedule[' . $name . ']" value="' . $phone . '"/>';
                 }
                 ?>
                 <div style="margin-bottom:15px;">
@@ -52,9 +53,9 @@
 
             <ul style="margin-right:45px;list-style:inside;">
                 <?php
-                if (!empty($_schdeule)) {
-                    foreach ($_schdeule as $key => $value) {
-                        echo "<li>{$key} -- {$value}</li>";
+                if (!empty($schedule)) {
+                    foreach ($schedule as $key => $value) {
+                        echo "<li style=margin-top:10px;>{$key} -- {$value}</li>";
                     }
                 } else {
                     echo "<p>The schedule doesn't have contacts saved !</p>";
