@@ -13,23 +13,14 @@
         "Papi" => "677394680"
     ];
 
-    function addOrUpdateValuesSchedule($name, $phone) {
-        $_schdeule[$name] = $phone;
-    }
-
-    function checkValues($name, $phone)
-    {
-        if (isset($name) && $name != '' && isset($phone) && $phone != '') {
-            addOrUpdateValuesSchedule($name, $phone);
+    if (isset($_POST['button'])) {
+        if (isset($_POST["name"]) && isset($_POST["phone"]) && $_POST["name"] != '' && $_POST["phone"] != '') {
+            $_schdeule[$_POST["name"]] = $_POST["phone"];
         } else {
             echo '<script language="javascript">';
             echo 'alert("Fill all the form fields please")';
             echo '</script>';
         }
-    }
-
-    if (isset($_POST['button'])) {
-        checkValues($_POST['name'], $_POST['phone']);
     }
 
     ?>
@@ -40,6 +31,11 @@
             </h2>
             <!-- action, is empty bcs we execute logic in the same file -->
             <form action="" method="post">
+                <?php
+                foreach ($_schdeule as $name => $phone) {
+                    echo '<input type="hidden" name="_schdeule[' . $name . ']" value="' . $phone . '"/>';
+                }
+                ?>
                 <div style="margin-bottom:15px;">
                     <label for="name">First name:</label><br>
                     <input type="text" id="name" name="name" style="border-radius:5px;height: 20px;background-color:aquamarine;"><br>
@@ -56,7 +52,7 @@
 
             <ul style="margin-right:45px;list-style:inside;">
                 <?php
-                if (count($_schdeule) > 0) {
+                if (!empty($_schdeule)) {
                     foreach ($_schdeule as $key => $value) {
                         echo "<li>{$key} -- {$value}</li>";
                     }
