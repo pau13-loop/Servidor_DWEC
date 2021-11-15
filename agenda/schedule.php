@@ -13,13 +13,33 @@
         "Papi" => "677394680"
     ];
 
+    function addOrUpdateValuesSchedule($name, $phone) {
+        $_schdeule[$name] = $phone;
+    }
+
+    function checkValues($name, $phone)
+    {
+        if (isset($name) && $name != '' && isset($phone) && $phone != '') {
+            addOrUpdateValuesSchedule($name, $phone);
+        } else {
+            echo '<script language="javascript">';
+            echo 'alert("Fill all the form fields please")';
+            echo '</script>';
+        }
+    }
+
+    if (isset($_POST['button'])) {
+        checkValues($_POST['name'], $_POST['phone']);
+    }
+
     ?>
     <div style="text-align:center;">
         <div>
             <h2>
                 Form Schedule
             </h2>
-            <form>
+            <!-- action, is empty bcs we execute logic in the same file -->
+            <form action="" method="post">
                 <div style="margin-bottom:15px;">
                     <label for="name">First name:</label><br>
                     <input type="text" id="name" name="name" style="border-radius:5px;height: 20px;background-color:aquamarine;"><br>
@@ -28,7 +48,7 @@
                     <label for="phone">Phone number:</label><br>
                     <input type="text" id="phone" name="phone" style="border-radius:5px;height:20px;background-color:bisque;"><br>
                 </div>
-                <input type="submit" value="Save contact" style="border-radius:5px;height:30px;width:10%;">
+                <input type="submit" name="button" value="Save contact" style="border-radius:5px;height:30px;width:10%;">
             </form>
         </div>
         <div style=margin-top:30px;>
