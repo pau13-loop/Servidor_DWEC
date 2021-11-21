@@ -27,22 +27,33 @@ $file2 = $_FILES["fileToUpload2"];
  * Show characteristics files saved in GLOBAL var $_FILES
  */
 foreach ($_FILES as $key => $value) {
-    print_r($key.": ".$value."\n");
-    echo"<br>";
+    print_r($key . ": " . $value . "\n");
+    echo "<br>";
 }
 
-echo"<br>";
-echo"¡ Characteristics file1 !";
-echo"<br>";
-print_r("Name: ".$file1['name']);
-echo"<br>";
-print_r("Type: ".$file1['type']);
-echo"<br>";
-print_r("Size: ".$file1['size']);
-echo"<br>";
-print_r("Tmp_name: ".$file1['tmp_name']);
-echo"<br>";
-print_r("Error: ".$file1['error']);
+if (isset($file1)) {
+    echo "<br>";
+    echo "¡ Characteristics file1 !";
+    echo "<br>";
+    print_r("Name: " . $file1['name']);
+    echo "<br>";
+    print_r("Type: " . $file1['type']);
+    echo "<br>";
+    print_r("Size: " . $file1['size']);
+    echo "<br>";
+    print_r("Tmp_name: " . $file1['tmp_name']);
+    echo "<br>";
+    print_r("Error: " . $file1['error']);
+    echo "<br>";
+}
+
+$file1['type'] = 'image/pdf';
+
+echo "<br>";
+print_r("Change file1 type: ".$file1['type']);
+echo "<br>";
+print_r("Name of file1 still being the same one as before: ".$file1['name']);
+
 ?>
 
 </html>
